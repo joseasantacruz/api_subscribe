@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "67429b21-dfb1-4d70-9db3-7be1333295eb",
+		"name": "API Subscribe",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12008523"
+	},
+	"item": [
+		{
+			"name": "Input 1",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"purchase_details\": [{\n        \"count\": 2,\n        \"product_name\": \"book\",\n        \"is_imported\": false,\n        \"price\": 12.49\n    },{\n        \"count\": 1,\n        \"product_name\": \"music CD\",\n        \"is_imported\": false,\n        \"price\": 14.99\n    },{\n        \"count\": 1,\n        \"product_name\": \"chocolate bar\",\n        \"is_imported\": false,\n        \"price\": 0.85\n    }]\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9292/purchase",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9292",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Input 2",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"purchase_details\": [{\n        \"count\": 1,\n        \"product_name\": \"box of chocolates\",\n        \"is_imported\": true,\n        \"price\": 10\n    },{\n        \"count\": 1,\n        \"product_name\": \"bottle of perfume\",\n        \"is_imported\": true,\n        \"price\": 47.50\n    }]\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9292/purchase",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9292",
+					"path": [
+						"purchase"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "book",
+							"disabled": true
+						},
+						{
+							"key": "is_imported",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "tax",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Input 3",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"purchase_details\": [{\n        \"count\": 1,\n        \"product_name\": \"bottle of perfume\",\n        \"is_imported\": true,\n        \"price\": 27.99\n    },{\n        \"count\": 1,\n        \"product_name\": \"bottle of perfume\",\n        \"is_imported\": false,\n        \"price\": 18.99\n    },{\n        \"count\": 1,\n        \"product_name\": \"packet of headache pills\",\n        \"is_imported\": false,\n        \"price\": 9.75\n    }    ,{\n        \"count\": 3,\n        \"product_name\": \"box of chocolates\",\n        \"is_imported\": true,\n        \"price\": 11.25\n    }]\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9292/purchase",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9292",
+					"path": [
+						"purchase"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "book",
+							"disabled": true
+						},
+						{
+							"key": "is_imported",
+							"value": "true",
+							"disabled": true
+						},
+						{
+							"key": "tax",
+							"value": "15",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

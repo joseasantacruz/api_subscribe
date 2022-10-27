@@ -35,4 +35,6 @@ bundle install
 ### Run server
 ```sh
 rackup
-```  
+``` 
+### Test
+This repo includes a JSON file that must be imported into postman(API Subscribe.postman_collection.json). 
