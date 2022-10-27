@@ -1,22 +1,24 @@
 require 'json'
 class App
   def call(env)
-    details_json = []
+    details_text = ''
     taxes = 0
     total = 0
     req = Rack::Request.new(env)
     body = JSON.parse env['rack.input'].read
     if req.path_info =~ /purchase/
       body['purchase_details'].each do |purchase_detail|
-        current_tax = (((get_product_tax(purchase_detail) * purchase_detail['price']).to_f / 100) * purchase_detail['count']).round(2)
+        current_tax = (((get_product_tax(purchase_detail) * purchase_detail['price']).to_f / 100) * 20).round / 20.0
+        current_tax = (current_tax * purchase_detail['count'])
         current_price = ((purchase_detail['price'] * purchase_detail['count']) + current_tax).round(2)
         purchase_detail['price'] = current_price
         taxes += current_tax
         total += current_price
-        details_json << purchase_detail
+        details_text << "#{purchase_detail['count'].to_s}#{purchase_detail['is_imported'] ? ' imported ' : ' '}#{purchase_detail['product_name']}: #{purchase_detail['price'].to_s}\n"
       end
-      response_json = { 'details' => details_json, 'Sales Taxes' => taxes.round(2), 'Total' => total.round(2) }
-      ['200', { 'Content-Type' => 'text/json' }, [JSON.pretty_generate(response_json)]]
+      details_text << "Sales Taxes: #{taxes.round(2).to_s}\n"
+      details_text << "Total: #{total.round(2).to_s}"
+      ['200', { 'Content-Type' => 'text/json' }, [details_text]]
     else
       ['404', { 'Content-Type' => 'text/json' }, ['Incorrect path.']]
     end
@@ -47,6 +49,5 @@ class App
     end
     tax
   end
-
 end
 run App.new
